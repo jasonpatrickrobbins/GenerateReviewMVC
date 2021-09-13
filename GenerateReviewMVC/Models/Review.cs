@@ -1,4 +1,4 @@
-﻿namespace GenerateReview.Models
+﻿namespace GenerateReviewMVC.Models
 {
 
     /// <summary>    /// Model class for Reviews.    /// </summary>

@@ -1,8 +1,88 @@
-﻿@{
+﻿@model Review
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<br>
+<br>
+<br>
+<br>
+<!-- Header -->
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">&mdash; Too busy to write your own game review? &mdash;</h1>
+    <br>
+    <h5><strong>Take advantage of our FREE automatic video game review generator!</strong></h5>
 </div>
+<br>
+<br>
+<br>
+<!-- Main Content -->
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <!-- Instant Game Reviews! Card -->
+            <div class="card-body text-center border-top-0 border-bottom-0 border-right-0 border-left-0">
+                <h2 class="card-title">Instant Game Reviews!</h2>
+                <h6><strong>Instructions and disclaimers:</strong></h6>
+                <p class="card-text">Simply enter the name of the video game you'd like to review and press 'Generate Review'. That's all! It's completly free and guaranteed to give (in)accurate results. Thank you for using The Generator and enjoy your review!</p>
+            </div>
+        </div>
+        <div class="space-1"><br></div>
+        <div class="col-md-4">
+            <!-- Let's Get Started! Card -->
+            <div class="card-body signup-form-card">
+                <h2 class="card-title text-center">Let's Get Started!</h2>
+                @using (Html.BeginForm("Generate", "Home", FormMethod.Get, new { id = "generateReviewFormm" }))
+                {
+                    <div class="form-group text-center">
+                        <input class="form-control form-control-lg" name="name" placeholder="Video Game Name" type="text">
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-outline-secondary btn-lg ">Generate Review</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<!-- If review is not null then show this card -->
+@if (Model != null)
+{
+    <!-- Display Review Card -->
+    <div class="card-body rounded awesome-card">
+        <br>
+        <h2 class="card-title text-center">
+            @Model.Name Review &ensp; | &ensp; Stars:
+            @for (int count = 0; count < @Model.StarRating; count++)
+            {
+                <span class="fa fa-star checked"></span>
+            }
+        </h2>
+        <br>
+        <div class="d-flex">
+            <hr class="my-auto flex-grow-1">
+        </div>
+        <br>
+        <!-- The auto generated review -->
+        <p>@Html.DisplayFor(model => Model.ReviewText)</p>
+        <p>
+            [
+            @Html.DisplayFor(model => Model.Overall),
+            @Html.DisplayFor(model => Model.ReviewTime),
+            @Html.DisplayFor(model => Model.ReviewerID),
+            @Html.DisplayFor(model => Model.ASIN),
+            @Html.DisplayFor(model => Model.ReviewerName),
+            @Html.DisplayFor(model => Model.Summary) ]
+        </p>
+    </div>
+}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
