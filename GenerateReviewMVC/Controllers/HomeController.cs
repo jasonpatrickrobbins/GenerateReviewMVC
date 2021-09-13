@@ -59,18 +59,16 @@ namespace GenerateReviewMVC.Controllers
         /// </summary>
         private void FileReader()
         {
-            string path = Path.Combine(_hostingEnvironment?.WebRootPath, "VideoGameReviews.json");
+            string path = Path.Combine(_hostingEnvironment.WebRootPath, "VideoGameReviews.json");
             if (path != null)
             {
                 using var reader = new StreamReader(path);
                 string line = null;
-                int count = 0;
-                while ((line = reader.ReadLine()) != null && count < 9000)
+                while ((line = reader.ReadLine()) != null)
                 {
                     if (!string.IsNullOrEmpty(line))
                     {
                         _reviews.Add(JsonConvert.DeserializeObject<Review>(line));
-                        count++;
                     }
                 }
             }
